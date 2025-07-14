@@ -1,84 +1,99 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Service Area Checker</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
 </head>
-<body style="font-family: sans-serif; text-align: center; max-width: 400px; margin: auto;">
-
-<h2>Check if You’re in Our Service Area</h2>
-
-<input type="text" id="address" placeholder="Enter your address" style="width: 100%; padding: 8px; margin-bottom: 8px;" autocomplete="off">
-<button id="check-btn" style="padding: 8px 16px;">Check</button>
-<p id="result" style="margin-top: 12px; font-weight: bold;"></p>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGIKItr6fYXFCP46NqKArqnhp5VXBynDc&libraries=places"></script>
-<script>
-const serviceCenter = { lat: 40.17396, lng: -80.24617 }; // Washington, PA
-const radiusMiles = 60;
-let selectedLocation = null;
-
-function initAutocomplete() {
-  const input = document.getElementById("address");
-  const autocomplete = new google.maps.places.Autocomplete(input, { types: ["address"] });
-  autocomplete.setFields(['geometry']);
-  autocomplete.addListener("place_changed", () => {
-    const place = autocomplete.getPlace();
-    if (!place.geometry) {
-      document.getElementById("result").textContent = "Please select a full address from the suggestions.";
-      selectedLocation = null;
-      return;
-    }
-    selectedLocation = {
-      lat: place.geometry.location.lat(),
-      lng: place.geometry.location.lng()
-    };
-    document.getElementById("result").textContent = "";
-  });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  initAutocomplete();
-
-  document.getElementById("check-btn").addEventListener("click", () => {
-    const result = document.getElementById("result");
-
-    if (!selectedLocation) {
-      result.textContent = "Please enter and select a full address from the suggestions.";
-      return;
-    }
-
-    const distance = getDistanceFromLatLonInMiles(
-      serviceCenter.lat, serviceCenter.lng,
-      selectedLocation.lat, selectedLocation.lng
-    );
-
-    if (distance <= radiusMiles) {
-      result.textContent = `✅ You’re in our service area! (${distance.toFixed(1)} miles away)`;
-    } else {
-      result.textContent = `⚠️ You might be slightly outside our regular service area (${distance.toFixed(1)} miles away), but contact us to inquire about service.`;
-    }
-  });
-});
-
-function getDistanceFromLatLonInMiles(lat1, lon1, lat2, lon2) {
-  const R = 3958.8;
-  const dLat = deg2rad(lat2-lat1);
-  const dLon = deg2rad(lon2-lon1);
-  const a =
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-    Math.sin(dLon/2) * Math.sin(dLon/2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  return R * c;
-}
-
-function deg2rad(deg) {
-  return deg * (Math.PI/180);
-}
-</script>
-
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1">&lt;title&gt;Service Area Checker&lt;/title&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body style="font-family: sans-serif; text-align: center; max-width: 400px; margin: auto;"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;h2&gt;Check if You’re in Our Service Area&lt;/h2&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;input type="text" id="address" placeholder="Enter your address" style="width: 100%; padding: 8px; margin-bottom: 8px;" autocomplete="off"&gt;</p>
+<p class="p1">&lt;button id="check-btn" style="padding: 8px 16px;"&gt;Check&lt;/button&gt;</p>
+<p class="p1">&lt;p id="result" style="margin-top: 12px; font-weight: bold;"&gt;&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGIKItr6fYXFCP46NqKArqnhp5VXBynDc&amp;libraries=places"&gt;&lt;/script&gt;</p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">const serviceCenter = { lat: 40.17396, lng: -80.24617 }; // Washington, PA</p>
+<p class="p1">const radiusMiles = 60;</p>
+<p class="p1">let selectedLocation = null;</p>
+<p class="p2"><br></p>
+<p class="p1">function initAutocomplete() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const input = document.getElementById("address");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const autocomplete = new google.maps.places.Autocomplete(input, { types: ["address"] });</p>
+<p class="p1"><span class="Apple-converted-space">  </span>autocomplete.setFields(['geometry']);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>autocomplete.addListener("place_changed", () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const place = autocomplete.getPlace();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (!place.geometry) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("result").textContent = "Please select a full address from the suggestions.";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>selectedLocation = null;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>selectedLocation = {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>lat: place.geometry.location.lat(),</p>
+<p class="p1"><span class="Apple-converted-space">      </span>lng: place.geometry.location.lng()</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("result").textContent = "";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">document.addEventListener("DOMContentLoaded", () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>initAutocomplete();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById("check-btn").addEventListener("click", () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const result = document.getElementById("result");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (!selectedLocation) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>result.textContent = "Please enter and select a full address from the suggestions.";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const distance = getDistanceFromLatLonInMiles(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>serviceCenter.lat, serviceCenter.lng,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>selectedLocation.lat, selectedLocation.lng</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (distance &lt;= radiusMiles) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>result.textContent = `✅ You’re in our service area! (${distance.toFixed(1)} miles away)`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>result.textContent = `⚠️ You might be slightly outside our regular service area (${distance.toFixed(1)} miles away), but contact us to inquire about service.`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1">});</p>
+<p class="p2"><br></p>
+<p class="p1">function getDistanceFromLatLonInMiles(lat1, lon1, lat2, lon2) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const R = 3958.8;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const dLat = deg2rad(lat2-lat1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const dLon = deg2rad(lon2-lon1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const a =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>Math.sin(dLat/2) * Math.sin(dLat/2) +</p>
+<p class="p1"><span class="Apple-converted-space">    </span>Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *</p>
+<p class="p1"><span class="Apple-converted-space">    </span>Math.sin(dLon/2) * Math.sin(dLon/2);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return R * c;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function deg2rad(deg) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return deg * (Math.PI/180);</p>
+<p class="p1">}</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
 </body>
 </html>
